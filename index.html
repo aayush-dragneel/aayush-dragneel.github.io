@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aayush Desai — Software Developer</title>
+<meta name="description" content="Portfolio of Aayush Desai, a software developer working in React, Python, and PostgreSQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#100e0b;
+    --bg-2:#16130f;
+    --surface:#1c1813;
+    --line:#2c271f;
+    --line-soft:#241f19;
+    --ink:#ece5d8;
+    --ink-soft:#b3aa99;
+    --muted:#857c6c;
+    --accent:#e0a13c;
+    --accent-deep:#c47d2a;
+    --terra:#cd6a48;
+    --max:1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Hanken Grotesk',sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* grain + glow atmosphere */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(700px 500px at 82% -5%, rgba(224,161,60,.10), transparent 60%),
+      radial-gradient(600px 500px at -5% 30%, rgba(205,106,72,.07), transparent 60%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;position:relative;z-index:2}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(10px);
+    background:linear-gradient(to bottom, rgba(16,14,11,.88), rgba(16,14,11,.55));
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, background .3s ease;
+  }
+  nav.scrolled{border-color:var(--line);}
+  .nav-inner{
+    max-width:var(--max);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.04em;
+    color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:9px;
+  }
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);}
+  .nav-links{display:flex;gap:30px;align-items:center;}
+  .nav-links a{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em;
+    color:var(--muted);text-decoration:none;transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--accent);}
+  .nav-toggle{display:none;}
+  @media(max-width:720px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  header{padding:170px 0 90px;position:relative;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:26px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .eyebrow::before{content:"";width:42px;height:1px;background:var(--accent);display:inline-block;}
+  h1{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:clamp(3.4rem,9vw,7.4rem);line-height:.95;letter-spacing:-.02em;
+    margin-bottom:30px;
+  }
+  h1 em{font-style:italic;color:var(--accent);}
+  .lede{
+    font-size:clamp(1.05rem,2.1vw,1.3rem);max-width:680px;color:var(--ink-soft);
+    font-weight:300;line-height:1.7;
+  }
+  .lede strong{color:var(--ink);font-weight:500;}
+  .hero-meta{
+    margin-top:46px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+  }
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.04em;
+    text-decoration:none;padding:13px 22px;border-radius:2px;
+    display:inline-flex;align-items:center;gap:9px;transition:all .22s ease;
+    border:1px solid var(--line);color:var(--ink);
+  }
+  .btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+  .btn.primary{background:var(--accent);color:#1a1306;border-color:var(--accent);font-weight:500;}
+  .btn.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:#150f04;}
+  .btn svg{width:15px;height:15px;}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:78px 0;border-top:1px solid var(--line-soft);position:relative;}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:54px;flex-wrap:wrap;}
+  .sec-num{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);
+    letter-spacing:.1em;
+  }
+  .sec-title{
+    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.9rem,4vw,2.9rem);
+    letter-spacing:-.01em;
+  }
+  .sec-rule{flex:1;height:1px;background:var(--line);min-width:40px;align-self:center;}
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{display:flex;flex-direction:column;gap:0;}
+  .job{
+    display:grid;grid-template-columns:200px 1fr;gap:40px;
+    padding:38px 0;border-top:1px solid var(--line-soft);
+  }
+  .job:first-child{border-top:none;}
+  .job-when{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);
+    letter-spacing:.03em;padding-top:5px;
+  }
+  .job-when .co{display:block;color:var(--accent);margin-top:8px;font-size:13px;}
+  .job-role{
+    font-family:'Fraunces',serif;font-size:1.55rem;font-weight:500;margin-bottom:18px;
+    letter-spacing:-.01em;
+  }
+  .job ul{list-style:none;display:flex;flex-direction:column;gap:13px;}
+  .job li{
+    position:relative;padding-left:24px;color:var(--ink-soft);font-weight:300;
+    font-size:.99rem;line-height:1.6;
+  }
+  .job li::before{
+    content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;
+    border:1px solid var(--accent);transform:rotate(45deg);
+  }
+  .job li strong{color:var(--ink);font-weight:500;}
+  @media(max-width:720px){
+    .job{grid-template-columns:1fr;gap:16px;}
+    .job-when{padding-top:0;}
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .card{
+    background:linear-gradient(160deg,var(--surface),var(--bg-2));
+    border:1px solid var(--line);border-radius:4px;padding:32px;
+    position:relative;overflow:hidden;transition:border-color .25s ease, transform .25s ease;
+  }
+  .card::after{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--terra));
+    transform:scaleX(0);transform-origin:left;transition:transform .35s ease;
+  }
+  .card:hover{border-color:var(--accent);transform:translateY(-4px);}
+  .card:hover::after{transform:scaleX(1);}
+  .card-tag{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--terra);margin-bottom:16px;display:block;
+  }
+  .card h3{
+    font-family:'Fraunces',serif;font-weight:500;font-size:1.5rem;
+    margin-bottom:16px;line-height:1.15;letter-spacing:-.01em;
+  }
+  .card p{color:var(--ink-soft);font-weight:300;font-size:.97rem;line-height:1.62;margin-bottom:22px;}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);
+    border:1px solid var(--line);padding:4px 11px;border-radius:100px;letter-spacing:.02em;
+  }
+  .card.wide{grid-column:1 / -1;}
+  @media(max-width:720px){
+    .proj-grid{grid-template-columns:1fr;}
+    .card.wide{grid-column:auto;}
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;}
+  .skill-block h4{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:18px;
+    padding-bottom:12px;border-bottom:1px solid var(--line-soft);
+  }
+  .skill-block ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .skill-block li{color:var(--ink-soft);font-weight:300;font-size:.96rem;display:flex;gap:11px;align-items:flex-start;}
+  .skill-block li::before{content:"//";color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;padding-top:2px;}
+  @media(max-width:720px){.skill-cols{grid-template-columns:1fr;gap:30px;}}
+
+  /* ---------- EDUCATION ---------- */
+  .edu{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+  .edu-school{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:500;letter-spacing:-.01em;}
+  .edu-degree{color:var(--ink-soft);font-weight:300;margin-top:8px;}
+  .edu-when{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);margin-top:14px;letter-spacing:.03em;}
+  .courses{display:flex;flex-wrap:wrap;gap:9px;}
+  .courses .chip{border-color:var(--line);}
+  .courses-label{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
+  @media(max-width:720px){.edu{grid-template-columns:1fr;gap:36px;}}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact{text-align:center;padding:100px 0 60px;}
+  .contact .big{
+    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.4rem,7vw,5rem);
+    letter-spacing:-.02em;line-height:1.02;margin-bottom:34px;
+  }
+  .contact .big em{font-style:italic;color:var(--accent);}
+  .contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;}
+  footer{
+    border-top:1px solid var(--line-soft);padding:30px 0;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);letter-spacing:.03em;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* hero staggered load */
+  .pre{opacity:0;transform:translateY(20px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;}
+  .d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.32s}.d4{animation-delay:.46s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    nav,.hero-meta,.contact-links,footer,body::before,body::after{display:none!important;}
+    body{background:#fff;color:#111;}
+    .card,.job li,.skill-block li,.lede,.edu-degree{color:#222!important;}
+    section,header{border:none;padding:18px 0;}
+    h1{color:#111;}.eyebrow,.sec-num,.card-tag,.skill-block h4,.courses-label{color:#a05a12!important;}
+    .reveal{opacity:1!important;transform:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span>AAYUSH DESAI</a>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#work">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+
+  <!-- HERO -->
+  <header>
+    <div class="eyebrow pre d1">Software Developer</div>
+    <h1 class="pre d2">Aayush<br><em>Desai</em></h1>
+    <p class="lede pre d3">
+      Junior software developer with a background in computer science and hands-on
+      experience across <strong>React, JavaScript, Python (Flask), Docker</strong> and
+      <strong>PostgreSQL</strong>. I write clean, testable code, dig into problems before
+      asking, and apply what I learn consistently across tasks — eager to grow in a
+      team where curiosity is valued.
+    </p>
+    <div class="hero-meta pre d4">
+      <a href="#projects" class="btn primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        View projects
+      </a>
+      <a href="mailto:aayush.desai740@gmail.com" class="btn">Email me</a>
+      <a href="#" id="printBtn" class="btn">Download résumé (PDF)</a>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">About</h2>
+      <span class="sec-rule"></span>
+    </div>
+    <p class="lede reveal" style="max-width:780px">
+      I'm known for systematic problem solving and writing clean, modular code that
+      follows existing patterns and team conventions. I'm comfortable in structured,
+      collaborative workflows — branching, pull requests, code reviews and full Agile
+      sprint cycles — and I lean toward researching independently before escalating.
+      I started in front-end React, then expanded into backend API work with Flask and
+      database management with PostgreSQL, picking up new skills as projects demand them.
+    </p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="work">
+    <div class="sec-head reveal">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">Experience</h2>
+      <span class="sec-rule"></span>
+    </div>
+
+    <div class="timeline">
+      <article class="job reveal">
+        <div class="job-when">Nov 2024 — Jan 2026<span class="co">Phoenix</span></div>
+        <div class="job-body">
+          <h3 class="job-role">Software Developer</h3>
+          <ul>
+            <li>Built and maintained <strong>component-based React features</strong>, writing clean, modular code with deliberate attention to readability, edge cases, and testability.</li>
+            <li>Participated actively in code reviews — both giving and incorporating feedback — upholding shared quality standards and a collaborative team culture.</li>
+            <li>Proactively researched solutions and applied learnings independently before escalating, using tools including GitHub Copilot to reduce blockers.</li>
+            <li>Followed structured <strong>Git workflows</strong> with branching strategies and pull requests to contribute clean, reviewable code.</li>
+            <li>Wrote unit tests and collaborated with QA and product stakeholders to clarify requirements and refine test cases within full Agile sprints.</li>
+            <li>Independently learned <strong>Python Flask</strong> for backend APIs and <strong>PostgreSQL</strong> for database management, applying both to production systems.</li>
+            <li>Migrated a legacy database from MySQL to PostgreSQL, <strong>reducing query execution time by 30%</strong> through indexing and query optimization.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job reveal">
+        <div class="job-when">Dec 2023 — Nov 2024<span class="co">IntouchCX</span></div>
+        <div class="job-body">
+          <h3 class="job-role">Training Facilitator / QA</h3>
+          <ul>
+            <li>Designed and executed structured unit-level and system-level test plans, writing clear instructions from stakeholder requirements and producing variance reports on expected vs. actual outcomes.</li>
+            <li>Identified gaps in operational workflows and process documentation, conducting root-cause analysis.</li>
+            <li>Collaborated with Development, Operations, and QA stakeholders to clarify requirements, review changes, and resolve quality issues prior to deployment.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job reveal">
+        <div class="job-when">Aug 2023 — Dec 2023<span class="co">IntouchCX</span></div>
+        <div class="job-body">
+          <h3 class="job-role">Technical Support Advisor</h3>
+          <ul>
+            <li>Logged, tracked, and analyzed issue and resolution data using CRM tools, surfacing recurring patterns and escalation trends that informed process improvement.</li>
+            <li>Applied structured root-cause analysis to diagnose technical issues across web-based platforms, documenting expected vs. actual results for the knowledge base.</li>
+            <li>Resolved software-level issues including <strong>JavaScript browser errors</strong> and server-side failures with hands-on debugging.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Projects</h2>
+      <span class="sec-rule"></span>
+    </div>
+
+    <div class="proj-grid">
+      <article class="card wide reveal">
+        <span class="card-tag">Capstone · Team Project</span>
+        <h3>Budgeting Application</h3>
+        <p>
+          A full-semester, cross-functional team project building a budgeting app from
+          scratch through to deployment. I developed core application logic in Java with
+          Android Studio — transaction tracking and data processing — and handled data
+          management with JSON for budget calculations, history, and financial summaries.
+          I proposed a stepper-navigation component that improved user confidence and
+          reduced friction, contributed to UI/UX brainstorming, kept a structured project
+          log for estimation accuracy, and coordinated the team's work through GitHub
+          branching and pull requests.
+        </p>
+        <div class="stack">
+          <span class="chip">Java</span><span class="chip">Android Studio</span>
+          <span class="chip">JSON</span><span class="chip">GitHub</span><span class="chip">UI/UX</span>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-tag">2022 · Machine Learning</span>
+        <h3>Credit Card Fraud Detection</h3>
+        <p>
+          A Python fraud-detection system built on Bayesian Networks and probabilistic
+          modeling to find patterns in transaction data. I designed a mathematical model
+          using conditional probabilities to represent causal relationships, applied
+          statistical inference to a real-world classification problem, and used NumPy and
+          statistical libraries to process the data and visualize results.
+        </p>
+        <div class="stack">
+          <span class="chip">Python</span><span class="chip">NumPy</span>
+          <span class="chip">Bayesian Networks</span><span class="chip">ML</span>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-tag">2023 · Embedded Systems</span>
+        <h3>Automated Mobile Robot</h3>
+        <p>
+          A mobile robot built on an Arduino board and microprocessors, programmed in C++.
+          It detects and maps its own route for reuse on repeat passes and provides security
+          features such as alerts — combining hardware design with real-time processing logic.
+        </p>
+        <div class="stack">
+          <span class="chip">C++</span><span class="chip">Arduino</span>
+          <span class="chip">Microprocessors</span><span class="chip">Robotics</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Skills</h2>
+      <span class="sec-rule"></span>
+    </div>
+
+    <div class="skill-cols">
+      <div class="skill-block reveal">
+        <h4>Languages &amp; Frontend</h4>
+        <ul>
+          <li>HTML, CSS &amp; JavaScript</li>
+          <li>React</li>
+          <li>Python</li>
+          <li>Java</li>
+        </ul>
+      </div>
+      <div class="skill-block reveal">
+        <h4>Backend &amp; Data</h4>
+        <ul>
+          <li>Flask (Python APIs)</li>
+          <li>SQL — joins, aggregations, subqueries, query optimization</li>
+          <li>PostgreSQL</li>
+          <li>MySQL</li>
+          <li>Machine Learning</li>
+        </ul>
+      </div>
+      <div class="skill-block reveal">
+        <h4>Tooling &amp; Practice</h4>
+        <ul>
+          <li>Git &amp; GitHub — version control &amp; tracking</li>
+          <li>Docker</li>
+          <li>QA &amp; test planning</li>
+          <li>Microsoft Suite</li>
+          <li>Documentation standards &amp; compliance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="sec-head reveal">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">Education</h2>
+      <span class="sec-rule"></span>
+    </div>
+
+    <div class="edu">
+      <div class="reveal">
+        <div class="edu-school">University of Manitoba</div>
+        <div class="edu-degree">B.Sc. — focus in Computer Science &amp; Mathematics</div>
+        <div class="edu-when">April 2018 — July 2023</div>
+      </div>
+      <div class="reveal">
+        <div class="courses-label">Relevant Coursework</div>
+        <div class="courses">
+          <span class="chip">Artificial Intelligence II</span>
+          <span class="chip">Software Engineering II</span>
+          <span class="chip">Machine Learning</span>
+          <span class="chip">Databases</span>
+          <span class="chip">Algorithms &amp; Data Structures</span>
+          <span class="chip">Human–Computer Interaction (UI/UX)</span>
+          <span class="chip">Mobile Robotics</span>
+          <span class="chip">Distributed Computing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact" style="border-top:1px solid var(--line-soft)">
+    <div class="reveal">
+      <div class="big">Let's build<br>something <em>good</em>.</div>
+      <div class="contact-links">
+        <a href="mailto:aayush.desai740@gmail.com" class="btn primary">aayush.desai740@gmail.com</a>
+        <a href="tel:4313352185" class="btn">431-335-2185</a>
+        <a href="https://github.com/" target="_blank" rel="noopener" class="btn" id="ghLink">GitHub</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="btn" id="liLink">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© <span id="yr"></span> Aayush Desai</span>
+    <span>References available upon request</span>
+  </footer>
+
+</div>
+
+<script>
+  // nav border on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // print / save as PDF
+  document.getElementById('printBtn').addEventListener('click', (e) => {
+    e.preventDefault(); window.print();
+  });
+
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
